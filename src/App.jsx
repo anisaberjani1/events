@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import CreateEvent from "./pages/event/CreateEvent";
 import UpdateEvent from "./pages/event/UpdateEvent";
 import EventDetails from "./pages/event/EventDetails";
+import Profile from "./pages/profile/Profile";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="events/create" element={<CreateEvent />} />
         <Route path="events/update" element={<UpdateEvent />} />
         <Route path="events/:eventId" element={<EventDetails />} />
+        <Route path="profile" element={<Profile />} />
       </Route>
       <Route path="login" element={<Login />} />
     </Routes>

@@ -1,8 +1,13 @@
 import { Button } from "flowbite-react";
 import React from "react";
 import { Link } from "react-router";
+import Collection from "../components/Collection";
+import Search from "../components/shared/Search";
+import CategoryFilter from "../components/shared/CategoryFilter";
+// import axios from "axios";
 
 const Home = () => {
+  // const events = await axios.get('/getAllEvents')
   return (
     <>
       <section className="bg-primary-50 bg-dotted-pattern bg-contain py-5 md:py-10">
@@ -37,7 +42,17 @@ const Home = () => {
           Trusted by <br /> Thousands of Events
         </h2>
         <div className="flex w-full flex-col gap-5 md:flex-row">
-          Search CategoryFilter
+          <Search />
+          <CategoryFilter />
+          <Collection
+            data={[]}
+            emptyTitle="No Events Found"
+            emptyStateSubtext="Come back later"
+            collectionType="All_Events"
+            limit={6}
+            page={1}
+            totalPages={2}
+          />
         </div>
       </section>
     </>
