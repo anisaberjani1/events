@@ -1,32 +1,45 @@
-import { Button } from "flowbite-react";
 import React from "react";
-import { Link, useNavigate } from "react-router";
+import { Button } from "flowbite-react";
+import { Link } from "react-router";
+import Logo from "../../assets/logo.png";
 import NavItems from "./NavItems";
 import MobileNav from "./MobileNav";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Header = () => {
-  const navigate = useNavigate();
+  const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
+  console.log(user);
   return (
-    <header className="w-full border-b">
+    <header className="w-full border-b border-gray-200 !py-3">
       <div className="wrapper flex items-center justify-between">
         <Link to="/" className="w-36">
-          {/* <img src="" alt="Events logo" width={128} height={38}/> */}Logo
+          <img src={Logo} alt="Events logo" width={128} height={38} />
         </Link>
-        {/* If signed in */}
-        <nav className="md:flex-between w-full max-w-xs">
+
+        <nav className="hidden md:flex md:flex-between w-full max-w-xs">
           <NavItems />
         </nav>
         <div className="flex w-32 justify-end gap-3">
-          {/* If signed in */}
-          <MobileNav/>
-          {/* If signed out */}
-          <Button
-            onClick={() => navigate("login")}
-            size="lg"
-            className="button w-full sm:w-fit"
-          >
-            Login
-          </Button>
+          {!isAuthenticated && (
+            <Button
+              onClick={() => loginWithRedirect()}
+              size="lg"
+              className="button w-full sm:w-fit"
+            >
+              Sign In
+            </Button>
+          )}
+
+          {isAuthenticated && (
+            <Button
+              onClick={() => logout()}
+              size="lg"
+              className="button w-full sm:w-fit hidden md:block"
+            >
+              Logout
+            </Button>
+          )}
+          <MobileNav />
         </div>
       </div>
     </header>
