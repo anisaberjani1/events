@@ -11,10 +11,10 @@ import {
   Button,
   HelperText,
 } from "flowbite-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { eventDefaultValues } from "../../../constants";
 
-export default function EventForm({ type = "Create" }) {
+export default function EventForm({ type = "Create" ,event,eventId,userId}) {
   const [files, setFiles] = useState([]);
 
   const {
@@ -25,11 +25,21 @@ export default function EventForm({ type = "Create" }) {
     formState: { errors, isSubmitting },
   } = useForm({
     resolver: yupResolver(eventFormSchema),
-    defaultValues: eventDefaultValues,
+    defaultValues: event || eventDefaultValues,
   });
 
+  useEffect(() => {
+    if (event && type === "Update") {
+      reset(event); 
+    }
+  }, [event, reset, type]);
+
   const onSubmit = (data) => {
-    console.log("Form Submitted:", { ...data, imageFile: files });
+    if (type === "Create") {
+      console.log("📌 Creating Event:", { ...data, imageFile: files, userId });
+    } else {
+      console.log("✏️ Updating Event:", { id: eventId, ...data, imageFile: files, userId });
+    }
     reset();
     setFiles(null);
   };
@@ -62,6 +72,7 @@ export default function EventForm({ type = "Create" }) {
         <div className="w-full">
           <Select
             {...register("category")}
+            value={watch("category")}
             theme={{
               field: {
                 select: {
@@ -138,6 +149,7 @@ export default function EventForm({ type = "Create" }) {
           <TextInput
             type="datetime-local"
             {...register("startDateTime")}
+              value={watch("startDateTime") ? new Date(watch("startDateTime")).toISOString().slice(0,16) : ""}
             theme={{
               field: {
                 input: {
@@ -157,6 +169,7 @@ export default function EventForm({ type = "Create" }) {
           <TextInput
             type="datetime-local"
             {...register("endDateTime")}
+            value={watch("endDateTime") ? new Date(watch("endDateTime")).toISOString().slice(0,16) : ""}
             theme={{
               field: {
                 input: {

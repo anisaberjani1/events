@@ -10,7 +10,7 @@ const Header = () => {
   const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
   console.log(user);
   return (
-    <header className="w-full border-b border-gray-200 !py-3">
+    <header className="w-full border-b border-gray-200 !py-3 ">
       <div className="wrapper flex items-center justify-between">
         <Link to="/" className="w-36">
           <img src={Logo} alt="Events logo" width={128} height={38} />
