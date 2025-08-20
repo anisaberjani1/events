@@ -1,11 +1,224 @@
-import React from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { eventFormSchema } from "../../middleware/validator";
 
-const EventForm = ({ userId, type }) => {
+import {
+  TextInput,
+  Textarea,
+  Select,
+  FileInput,
+  Checkbox,
+  Button,
+  HelperText,
+} from "flowbite-react";
+import { useState } from "react";
+import { eventDefaultValues } from "../../../constants";
+
+export default function EventForm({ type = "Create" }) {
+  const [files, setFiles] = useState([]);
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    watch,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    resolver: yupResolver(eventFormSchema),
+    defaultValues: eventDefaultValues,
+  });
+
+  const onSubmit = (data) => {
+    console.log("Form Submitted:", { ...data, imageFile: files });
+    reset();
+    setFiles(null);
+  };
+  const onError = (errors) => {
+    console.log("❌ Validation Errors:", errors);
+  };
+
   return (
-    <div>
-      EventForm {userId} {type}
-    </div>
-  );
-};
+    <form
+      onSubmit={handleSubmit(onSubmit, onError)}
+      className="flex flex-col gap-5"
+    >
+      <div className="flex flex-col md:flex-row gap-5">
+        <div className="w-full">
+          <TextInput
+            {...register("title")}
+            placeholder="Event title"
+            theme={{
+              field: {
+                input: {
+                  base: "!bg-gray-50 !h-[54px] !text-gray-500 !placeholder:text-gray-500 !rounded-full !px-4 !py-3 !border-none !focus:ring-0",
+                },
+              },
+            }}
+          />
+          {errors.title && (
+            <HelperText color="failure">{errors.title.message}</HelperText>
+          )}
+        </div>
+        <div className="w-full">
+          <Select
+            {...register("category")}
+            theme={{
+              field: {
+                select: {
+                  base: "!w-full !bg-gray-50 !h-[54px] !text-gray-500 !placeholder:text-gray-500 !rounded-full !px-5 !py-3 !border-none !focus:ring-0",
+                },
+              },
+            }}
+          >
+            <option value="">Select category</option>
+            <option value="tech">Tech</option>
+            <option value="music">Music</option>
+            <option value="business">Business</option>
+          </Select>
+          {errors.category && (
+            <HelperText color="failure">{errors.category.message}</HelperText>
+          )}
+        </div>
+      </div>
 
-export default EventForm;
+      <div className="flex flex-col md:flex-row gap-5">
+        <div className="w-full">
+          <Textarea
+            {...register("description")}
+            placeholder="Description"
+            rows={6}
+            theme={{
+              base: "!bg-gray-50 !text-gray-500 !placeholder:text-gray-500 rounded-2xl !px-4 !py-3 !border-none !focus:ring-0",
+            }}
+          />
+          {errors.description && (
+            <HelperText color="failure">
+              {errors.description.message}
+            </HelperText>
+          )}
+        </div>
+        <div className="w-full">
+          <FileInput
+            id="imageFile"
+            {...register("imageFile")}
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+              setFiles("imageFile", file, { shouldValidate: true });
+            }}
+            theme={{
+              base: "!bg-gray-50 !h-[54px] !text-gray-500 !placeholder:text-gray-500 rounded-full !px-4 !py-3 !border-none !focus:ring-0",
+            }}
+          />
+          {errors.imageUrl && (
+            <HelperText color="failure">{errors.imageUrl.message}</HelperText>
+          )}
+        </div>
+      </div>
+
+      <div className="w-full">
+        <TextInput
+          {...register("location")}
+          placeholder="Event location or Online"
+          theme={{
+            field: {
+              input: {
+                base: "!bg-gray-50 !h-[54px] !text-gray-500 !placeholder:text-gray-500 !rounded-full !px-4 !py-3 !border-none !focus:ring-0",
+              },
+            },
+          }}
+        />
+        {errors.location && (
+          <HelperText color="failure">{errors.location.message}</HelperText>
+        )}
+      </div>
+
+      <div className="flex flex-col md:flex-row gap-5">
+        <div className="w-full">
+          <p className="text-[14px] !p-1">Start Date: </p>
+          <TextInput
+            type="datetime-local"
+            {...register("startDateTime")}
+            theme={{
+              field: {
+                input: {
+                  base: "!bg-gray-50 !h-[54px] !text-gray-500 !placeholder:text-gray-500 !rounded-full !px-4 !py-3 !border-none !focus:ring-0",
+                },
+              },
+            }}
+          />
+          {errors.startDateTime && (
+            <HelperText color="failure">
+              {errors.startDateTime.message}
+            </HelperText>
+          )}
+        </div>
+        <div className="w-full">
+          <p className="text-[14px] !p-1">End Date: </p>
+          <TextInput
+            type="datetime-local"
+            {...register("endDateTime")}
+            theme={{
+              field: {
+                input: {
+                  base: "!bg-gray-50 !h-[54px] !text-gray-500 !placeholder:text-gray-500 !rounded-full !px-4 !py-3 !border-none !focus:ring-0",
+                },
+              },
+            }}
+          />
+          {errors.endDateTime && (
+            <HelperText color="failure">
+              {errors.endDateTime.message}
+            </HelperText>
+          )}
+        </div>
+      </div>
+
+      <div className="flex flex-col md:flex-row gap-5">
+        <div className="w-full flex items-center gap-3">
+          <TextInput
+            {...register("price")}
+            placeholder="Price"
+            disabled={watch("isFree")}
+            theme={{
+              field: {
+                input: {
+                  base: "!bg-gray-50 !h-[54px] !text-gray-500 !placeholder:text-gray-500 !rounded-full !px-4 !py-3 !border-none !focus:ring-0",
+                },
+              },
+            }}
+          />
+          <Checkbox {...register("isFree")} id="isFree" />
+          <label htmlFor="isFree">Free Ticket</label>
+          {errors.price && (
+            <HelperText color="failure">{errors.price.message}</HelperText>
+          )}
+        </div>
+
+        <div className="w-full">
+          <TextInput
+            {...register("url")}
+            placeholder="Event URL"
+            theme={{
+              field: {
+                input: {
+                  base: "!bg-gray-50 !h-[54px] !text-gray-500 !placeholder:text-gray-500 !rounded-full !px-4 !py-3 !border-none !focus:ring-0",
+                },
+              },
+            }}
+          />
+          {errors.url && (
+            <HelperText color="failure">{errors.url.message}</HelperText>
+          )}
+        </div>
+      </div>
+
+      <Button
+        type="submit"
+        disabled={isSubmitting}
+        className="button col-span-2 w-full"
+      >
+        {isSubmitting ? "Submitting..." : `${type} Event`}
+      </Button>
+    </form>
+  );
+}
