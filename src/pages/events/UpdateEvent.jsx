@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import EventForm from "../../components/events/EventForm";
 import { useParams } from "react-router";
-import { events } from "../../data/mockDB";
+import { useEvent } from "../../hooks/useEvents";
 
 const UpdateEvent = () => {
   const { id } = useParams();
-  const [event, setEvent] = useState(null);
+  const { data: event, isLoading } = useEvent(id);
 
-  useEffect(() => {
-    const foundEvent = events.find((e) => e.id === id);
-    setEvent(foundEvent || null);
-  }, [id]);
+  if (isLoading) return <p>Loading event...</p>;
 
   return (
     <>
@@ -20,7 +17,7 @@ const UpdateEvent = () => {
         </h3>
       </section>
       <div className="wrapper !my-8">
-        <EventForm userId={"userId"} event={event} eventId={id} type="Update" />
+        <EventForm event={event} eventId={id} type="Update" />
       </div>
     </>
   );

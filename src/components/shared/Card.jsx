@@ -11,7 +11,7 @@ const formatDateTime = (date) => {
   };
 };
 
-const Card = ({ event, hasOrderLink, hidePrice }) => {
+const Card = ({ event, hidePrice }) => {
   return (
     <div className="group relative flex min-h-[380px] w-full max-w-[400px] flex-col overflow-hidden rounded-xl bg-white shadow-md transition-all hover:shadow-lg md:min-h-[438px]">
       <Link
@@ -50,14 +50,8 @@ const Card = ({ event, hasOrderLink, hidePrice }) => {
         </Link>
         <div className="flex-between w-full !pt-18">
           <p className="p-medium-14 md:p-medium-16 text-gray-600">
-            event.organizerId
+            {event.organizerName || "Unknown Organizer"}
           </p>
-          {hasOrderLink && (
-            <Link to={`orders?eventId=${event.id}`} className="flex gap-2">
-              <p className="text-primary-500">Order Details</p>
-              {/* <img src="/icons/arrow.svg" alt="search" width={10} height={10}/> */}
-            </Link>
-          )}
         </div>
       </div>
     </div>

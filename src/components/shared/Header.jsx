@@ -4,11 +4,11 @@ import { Link } from "react-router";
 import Logo from "../../assets/logo.png";
 import NavItems from "./NavItems";
 import MobileNav from "./MobileNav";
-import { useAuth0 } from "@auth0/auth0-react";
+import { useUser } from "../../context/UserContext";
 
 const Header = () => {
-  const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
-  console.log(user);
+  const { login, logout, isAuthenticated } = useUser();
+
   return (
     <header className="w-full border-b border-gray-200 !py-3 ">
       <div className="wrapper flex items-center justify-between">
@@ -22,7 +22,7 @@ const Header = () => {
         <div className="flex w-32 justify-end gap-3">
           {!isAuthenticated && (
             <Button
-              onClick={() => loginWithRedirect()}
+              onClick={() => login()}
               size="lg"
               className="button w-full sm:w-fit"
             >

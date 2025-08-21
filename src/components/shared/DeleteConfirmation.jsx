@@ -1,32 +1,25 @@
 import { useState } from "react";
 import { Modal, Button, ModalHeader, ModalBody } from "flowbite-react";
 import deleteIcon from "../../assets/icons/delete.svg";
+import { useDeleteEvent } from "../../hooks/useEvents";
+import { useUser } from "../../context/UserContext";
 
 const DeleteConfirmation = ({ eventId }) => {
+  const {user} = useUser();
+  const userId = user?.sub;
+  const { mutateAsync: deleteMutation, isLoading } = useDeleteEvent(userId);
   const [openModal, setOpenModal] = useState(false);
-  const [isPending, setIsPending] = useState(false);
 
-  // const handleDelete = async () => {
-  //   setIsPending(true);
-  //   try {
-  //     const res = await fetch(`/api/events/${eventId}`, {
-  //       method: "DELETE",
-  //     });
-
-  //     if (!res.ok) {
-  //       throw new Error("Failed to delete event");
-  //     }
-
-  //     ✅ close modal and optionally refresh list
-  //     setOpenModal(false);
-  //     If you want to reload the page/list:
-  //     window.location.reload();
-  //   } catch (err) {
-  //     console.error("Delete failed:", err);
-  //   } finally {
-  //     setIsPending(false);
-  //   }
-  // };
+  const handleDelete = async () => {
+    try {
+      await deleteMutation(eventId);
+      setOpenModal(false);
+      alert("Event deleted successfully!");
+    } catch (err) {
+      console.error("Delete failed:", err);
+      alert("Failed to delete event.");
+    }
+  };
 
   return (
     <>
@@ -50,10 +43,10 @@ const DeleteConfirmation = ({ eventId }) => {
               <Button
                 color="red"
                 className="!px-2"
-                // onClick={handleDelete}
-                disabled={isPending}
+                onClick={handleDelete}
+                disabled={isLoading}
               >
-                {isPending ? "Deleting..." : "Yes, delete"}
+                {isLoading ? "Deleting..." : "Yes, delete"}
               </Button>
               <Button
                 color="blue"

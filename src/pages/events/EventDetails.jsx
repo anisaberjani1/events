@@ -2,10 +2,10 @@ import React from "react";
 import { useParams } from "react-router";
 
 import CheckoutButton from "../../components/shared/CheckoutButton";
-import { events } from "../../data/mockDB";
 import calendar from "../../assets/icons/calendar.svg";
 import location from "../../assets/icons/location.svg";
 import Collection from "../../components/shared/Collection";
+import { useAllEvents, useEvent } from "../../hooks/useEvents";
 
 const formatDateTime = (date) => {
   const d = new Date(date);
@@ -16,17 +16,14 @@ const formatDateTime = (date) => {
 };
 
 const EventDetails = () => {
-  const { id } = useParams();
-  const event = events.find((e) => e.id === id);
-  if (!event) {
-    return <p className="text-center mt-10">Event not found</p>;
-  }
+  const { id } = useParams();  
+  const { data: event, isLoading, isError } = useEvent(id);
+  const {data: allEvents} = useAllEvents()
 
-  // find organizer
-  // const organizer = users.find((u) => u.id === event.organizerId);
+  if (isLoading) return <p className="text-center mt-10">Loading...</p>;
+  if (isError || !event) return <p className="text-center mt-10">Event not found</p>;
 
-  // related events: same category, excluding current event
-  const relatedEvents = events.filter(
+  const relatedEvents = allEvents?.filter(
     (e) => e.category === event.category && e.id !== event.id
   );
   return (
@@ -55,8 +52,7 @@ const EventDetails = () => {
                 <p className="p-medium-18 ml-2 mt-2 sm:mt-0">
                   by{" "}
                   <span className="text-primary-500">
-                    {/* event.organizer.firstName event.organizer.lastName */}
-                    event.firstname
+                    {event.organizerName}
                   </span>
                 </p>
               </div>
@@ -67,7 +63,7 @@ const EventDetails = () => {
             <div className="flex flex-col gap-5">
               <div className="flex gap-2 md:gap-3">
                 <img src={calendar} alt="calendar" width={32} height={32} />
-                <div className="p-medium-16 lg:p-regular-20 flex flex-wrap items-center">
+                <div className="p-medium-16 lg:p-regular-20 flex flex-wrap items-center gap-4">
                   <p>
                     {formatDateTime(event.startDateTime).dateOnly} - {" "}
                     {formatDateTime(event.startDateTime).timeOnly}

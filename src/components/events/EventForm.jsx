@@ -1,6 +1,8 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { eventFormSchema } from "../../middleware/validator";
+import { useAuth0 } from "@auth0/auth0-react";
+import axios from "axios";
 
 import {
   TextInput,
@@ -13,9 +15,18 @@ import {
 } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { eventDefaultValues } from "../../../constants";
+import { useCreateEvent, useUpdateEvent } from "../../hooks/useEvents";
+import { useNavigate } from "react-router";
 
-export default function EventForm({ type = "Create" ,event,eventId,userId}) {
-  const [files, setFiles] = useState([]);
+export default function EventForm({ type = "Create", event, eventId }) {
+  const navigate = useNavigate();
+  const { user } = useAuth0();
+  const [files, setFiles] = useState(null);
+  const [imageUrl, setImageUrl] = useState(event?.imageUrl || "");
+  const { mutateAsync: createEventMutation, isLoading: isCreating } =
+    useCreateEvent();
+  const { mutateAsync: updateEventMutation, isLoading: isUpdating } =
+    useUpdateEvent();
 
   const {
     register,
@@ -30,21 +41,49 @@ export default function EventForm({ type = "Create" ,event,eventId,userId}) {
 
   useEffect(() => {
     if (event && type === "Update") {
-      reset(event); 
+      reset(event);
+      setImageUrl(event.imageUrl || "");
     }
   }, [event, reset, type]);
 
-  const onSubmit = (data) => {
+  const uploadImage = async (file) => {
+    if (!file) return "";
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "react_events");
+    const { data } = await axios.post(
+      "https://api.cloudinary.com/v1_1/drjnie1fg/image/upload",
+      formData
+    );
+    return data.secure_url;
+  };
+
+  const onSubmit = async (data) => {
+    let uploadedUrl = imageUrl;
+
+    if (files) {
+      uploadedUrl = await uploadImage(files);
+      setImageUrl(uploadedUrl);
+    }
+    const eventPayload = {
+      ...data,
+      imageUrl: uploadedUrl,
+      organizerId: user?.sub,
+      organizerName: user?.name,
+    };
     if (type === "Create") {
-      console.log("📌 Creating Event:", { ...data, imageFile: files, userId });
+      await createEventMutation(eventPayload);
+      navigate("/");
     } else {
-      console.log("✏️ Updating Event:", { id: eventId, ...data, imageFile: files, userId });
+      await updateEventMutation({ id: eventId, ...eventPayload });
+      navigate(`/events/${eventId}`);
     }
     reset();
-    setFiles(null);
+    setFiles([]);
   };
+
   const onError = (errors) => {
-    console.log("❌ Validation Errors:", errors);
+    console.log("Validation Errors:", errors);
   };
 
   return (
@@ -112,10 +151,7 @@ export default function EventForm({ type = "Create" ,event,eventId,userId}) {
           <FileInput
             id="imageFile"
             {...register("imageFile")}
-            onChange={(e) => {
-              const file = e.target.files?.[0];
-              setFiles("imageFile", file, { shouldValidate: true });
-            }}
+            onChange={(e) => setFiles(e.target.files?.[0])}
             theme={{
               base: "!bg-gray-50 !h-[54px] !text-gray-500 !placeholder:text-gray-500 rounded-full !px-4 !py-3 !border-none !focus:ring-0",
             }}
@@ -149,7 +185,11 @@ export default function EventForm({ type = "Create" ,event,eventId,userId}) {
           <TextInput
             type="datetime-local"
             {...register("startDateTime")}
-              value={watch("startDateTime") ? new Date(watch("startDateTime")).toISOString().slice(0,16) : ""}
+            value={
+              watch("startDateTime")
+                ? new Date(watch("startDateTime")).toISOString().slice(0, 16)
+                : ""
+            }
             theme={{
               field: {
                 input: {
@@ -169,7 +209,11 @@ export default function EventForm({ type = "Create" ,event,eventId,userId}) {
           <TextInput
             type="datetime-local"
             {...register("endDateTime")}
-            value={watch("endDateTime") ? new Date(watch("endDateTime")).toISOString().slice(0,16) : ""}
+            value={
+              watch("endDateTime")
+                ? new Date(watch("endDateTime")).toISOString().slice(0, 16)
+                : ""
+            }
             theme={{
               field: {
                 input: {
@@ -227,7 +271,7 @@ export default function EventForm({ type = "Create" ,event,eventId,userId}) {
 
       <Button
         type="submit"
-        disabled={isSubmitting}
+        disabled={isSubmitting || isCreating || isUpdating}
         className="button col-span-2 w-full"
       >
         {isSubmitting ? "Submitting..." : `${type} Event`}

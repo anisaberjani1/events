@@ -3,10 +3,13 @@ import Collection from "../components/shared/Collection";
 import Search from "../components/shared/Search";
 import CategoryFilter from "../components/shared/CategoryFilter";
 import Hero from "../components/home/Hero";
-import { events } from "../data/mockDB";
+import { useAllEvents } from "../hooks/useEvents";
 
 const Home = () => {
-  console.log(events);
+  const { data: events, isLoading, isError } = useAllEvents();
+
+   if (isLoading) return <p className="wrapper">Loading events...</p>;
+  if (isError) return <p className="wrapper">Failed to load events.</p>;
   return (
     <>
       <Hero />
