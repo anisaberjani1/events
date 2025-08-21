@@ -3,199 +3,127 @@
   "events": [
     {
       "url": "https://reactconf2025.com",
-      "isFree": true,
-      "price": "10",
+      "isFree": false,
+      "price": "15",
+      "category": "tech",
+      "endDateTime": "2025-08-29T08:14:00.000Z",
+      "startDateTime": "2025-08-21T12:14:57.830Z",
+      "imageFile": {
+        "0": {}
+      },
+      "location": "Pristina",
+      "description": "A gathering of industry leaders, developers, and startups showcasing breakthroughs in AI, blockchain, and cloud computing.",
+      "title": "FutureTech Summit 2025",
+      "imageUrl": "https://res.cloudinary.com/drjnie1fg/image/upload/v1755780047/snui1aq2kjohppav7qgz.jpg",
+      "organizerId": "google-oauth2|107809388300995750244",
+      "organizerName": "Anisa Berjani",
+      "id": "cf9b"
+    },
+    {
+      "id": "dba6",
+      "url": "https://reactconf2025.com",
+      "isFree": false,
+      "price": "20",
       "category": "music",
-      "endDateTime": "2025-09-03T20:17:00.000Z",
-      "startDateTime": "2025-08-26T20:17:00.000Z",
+      "endDateTime": "2025-08-27T08:14:00.000Z",
+      "startDateTime": "2025-08-26T08:14:00.000Z",
+      "imageFile": {
+        "0": {}
+      },
+      "location": "Berlin, Germany",
+      "description": "An outdoor music experience with live performances, DJs, and immersive sound stages.",
+      "title": "Beats & Beyond Festival",
+      "imageUrl": "https://res.cloudinary.com/drjnie1fg/image/upload/v1755780095/ktaryyohrfj2viwq9ufo.jpg",
+      "organizerId": "google-oauth2|107809388300995750244",
+      "organizerName": "Anisa Berjani"
+    },
+    {
+      "id": "c42c",
+      "url": "https://reactconf2025.com",
+      "isFree": false,
+      "price": "50",
+      "category": "business",
+      "endDateTime": "2025-09-07T08:14:00.000Z",
+      "startDateTime": "2025-09-06T08:14:00.000Z",
       "imageFile": {
         "0": {}
       },
       "location": "Pristina, Kosovo",
-      "description": "Newest event description",
-      "title": "Newest Event 1",
-      "imageUrl": "https://res.cloudinary.com/drjnie1fg/image/upload/v1755736045/vi4klao072yqlq2evovu.jpg",
-      "organizerId": "google-oauth2|107809388300995750244",
-      "organizerName": "Anisa Berjani",
-      "id": "6a14"
-    },
-    {
-      "url": "https://reactconf2025.com",
-      "isFree": true,
-      "price": "",
-      "category": "tech",
-      "endDateTime": "2025-09-02T20:52:00.000Z",
-      "startDateTime": "2025-08-28T20:52:00.000Z",
-      "imageFile": {
-        "0": {}
-      },
-      "location": "Pristina",
-      "description": "Description event",
-      "title": "Modified Event",
-      "imageUrl": "https://res.cloudinary.com/drjnie1fg/image/upload/v1755737628/lqu9zofbgklf7fmovhsw.jpg",
-      "organizerId": "google-oauth2|107809388300995750244",
-      "organizerName": "Anisa Berjani",
-      "id": "dae2"
-    },
-    {
-      "id": "5f90",
-      "url": "https://reactconf2025.com",
-      "isFree": true,
-      "price": "",
-      "category": "tech",
-      "endDateTime": "2025-09-01T22:34:00.000Z",
-      "startDateTime": "2025-08-28T22:34:00.000Z",
-      "imageFile": {
-        "0": {}
-      },
-      "location": "Pristina",
-      "description": "Latest Event description",
-      "title": "Latest Event Added ",
-      "imageUrl": "https://res.cloudinary.com/drjnie1fg/image/upload/v1755743699/klzdyono9bwss5jc6xa8.jpg",
+      "description": "Top CEOs, investors, and visionaries discuss trends in leadership, sustainability, and global markets.",
+      "title": "Global Leaders Forum",
+      "imageUrl": "https://res.cloudinary.com/drjnie1fg/image/upload/v1755780148/yjyydkoynv9p1illslxl.jpg",
       "organizerId": "google-oauth2|107809388300995750244",
       "organizerName": "Anisa Berjani"
     },
     {
-      "id": "db69",
-      "url": "https://reactconf2025.com",
-      "isFree": true,
-      "price": "",
-      "category": "business",
-      "endDateTime": "2025-09-01T22:34:00.000Z",
-      "startDateTime": "2025-08-21T02:34:10.526Z",
-      "imageFile": {
-        "0": {}
-      },
-      "location": "Pristina",
-      "description": "Test 1",
-      "title": "Test 1",
-      "imageUrl": "https://res.cloudinary.com/drjnie1fg/image/upload/v1755743743/xszphl1uhfhg5c9n7nxj.jpg",
-      "organizerId": "google-oauth2|107809388300995750244",
-      "organizerName": "Anisa Berjani"
-    },
-    {
-      "id": "ee5f",
-      "url": "https://reactconf2025.com",
-      "isFree": true,
-      "price": "",
-      "category": "business",
-      "endDateTime": "2025-08-28T22:34:00.000Z",
-      "startDateTime": "2025-08-21T02:34:10.526Z",
-      "imageFile": {
-        "0": {}
-      },
-      "location": "Pristina",
-      "description": "Test 2",
-      "title": "Test 2",
-      "imageUrl": "https://res.cloudinary.com/drjnie1fg/image/upload/v1755743780/yqhjthzucar6usufqubu.jpg",
-      "organizerId": "google-oauth2|107809388300995750244",
-      "organizerName": "Anisa Berjani"
-    },
-    {
-      "id": "daa8",
-      "url": "https://reactconf2025.com",
-      "isFree": false,
-      "price": "20",
-      "category": "business",
-      "endDateTime": "2025-09-05T22:34:00.000Z",
-      "startDateTime": "2025-08-21T02:34:10.526Z",
-      "imageFile": {
-        "0": {}
-      },
-      "location": "Pristina",
-      "description": "Test3",
-      "title": "Test 3",
-      "imageUrl": "https://res.cloudinary.com/drjnie1fg/image/upload/v1755743818/vqp1onvwuo14fc4duagp.jpg",
-      "organizerId": "google-oauth2|107809388300995750244",
-      "organizerName": "Anisa Berjani"
-    },
-    {
-      "id": "2a1c",
+      "id": "45a0",
       "url": "https://reactconf2025.com",
       "isFree": true,
       "price": "",
       "category": "music",
-      "endDateTime": "2025-09-06T07:39:00.000Z",
-      "startDateTime": "2025-09-01T07:39:00.000Z",
-      "imageFile": {
-        "0": {}
-      },
-      "location": "Pristina",
-      "description": "description",
-      "title": "Events number 7",
-      "imageUrl": "https://res.cloudinary.com/drjnie1fg/image/upload/v1755776455/gethl7ia8bgoq5mjcabg.jpg",
-      "organizerId": "google-oauth2|107809388300995750244",
-      "organizerName": "Anisa Berjani"
-    },
-    {
-      "id": "34de",
-      "url": "https://reactconf2025.com",
-      "isFree": true,
-      "price": "",
-      "category": "tech",
-      "endDateTime": "2025-08-28T07:40:00.000Z",
-      "startDateTime": "2025-08-21T11:40:04.797Z",
+      "endDateTime": "2025-08-29T19:14:00.000Z",
+      "startDateTime": "2025-08-29T14:14:00.000Z",
       "imageFile": {
         "0": {}
       },
       "location": "Berlin, Germany",
-      "description": "description",
-      "title": "Event num 8",
-      "imageUrl": "https://res.cloudinary.com/drjnie1fg/image/upload/v1755776495/wuock6b5tgr2fwqx2inn.png",
+      "description": "A showcase of emerging artists bringing soulful performances in an intimate setting.",
+      "title": "Acoustic Nights Live",
+      "imageUrl": "https://res.cloudinary.com/drjnie1fg/image/upload/v1755780216/cb9gbjdsufp5smfzrevs.jpg",
       "organizerId": "google-oauth2|107809388300995750244",
       "organizerName": "Anisa Berjani"
     },
     {
-      "id": "539c",
       "url": "https://reactconf2025.com",
       "isFree": false,
-      "price": "20",
+      "price": "10",
       "category": "tech",
-      "endDateTime": "2025-09-01T07:40:00.000Z",
-      "startDateTime": "2025-08-21T11:40:04.797Z",
+      "endDateTime": "2025-08-29T08:14:00.000Z",
+      "startDateTime": "2025-08-28T08:14:00.000Z",
       "imageFile": {
         "0": {}
       },
-      "location": "Berlin, Germany",
-      "description": "description",
-      "title": "Event num 9",
-      "imageUrl": "https://res.cloudinary.com/drjnie1fg/image/upload/v1755776540/je4cwigy5rohvtvxjhol.png",
+      "location": "London, England",
+      "description": "A 48-hour hackathon where developers, designers, and entrepreneurs team up to build the next big thing.",
+      "title": "Code & Coffee Hackathon",
+      "imageUrl": "https://res.cloudinary.com/drjnie1fg/image/upload/v1755780277/wwnjkncb9o6om5mutsaq.jpg",
       "organizerId": "google-oauth2|107809388300995750244",
-      "organizerName": "Anisa Berjani"
+      "organizerName": "Anisa Berjani",
+      "id": "bd3e"
     },
     {
-      "id": "cc68",
-      "url": "https://reactconf2025.com",
-      "isFree": true,
-      "price": "",
-      "category": "music",
-      "endDateTime": "2025-09-02T07:40:00.000Z",
-      "startDateTime": "2025-08-25T07:40:00.000Z",
-      "imageFile": {
-        "0": {}
-      },
-      "location": "Pristina",
-      "description": "description",
-      "title": "Event num 10",
-      "imageUrl": "https://res.cloudinary.com/drjnie1fg/image/upload/v1755776584/x8a3i5sy7n5bhqgqgjbh.jpg",
-      "organizerId": "google-oauth2|107809388300995750244",
-      "organizerName": "Anisa Berjani"
-    },
-    {
-      "id": "29e2",
       "url": "https://reactconf2025.com",
       "isFree": true,
       "price": "",
       "category": "business",
-      "endDateTime": "2025-08-26T07:44:00.000Z",
-      "startDateTime": "2025-08-21T11:44:39.495Z",
+      "endDateTime": "2025-09-13T08:14:00.000Z",
+      "startDateTime": "2025-09-06T08:14:00.000Z",
+      "imageFile": {
+        "0": {}
+      },
+      "location": "London, England",
+      "description": "A day of networking, workshops, and inspiration for women entrepreneurs and professionals.",
+      "title": "Women in Business Summit",
+      "imageUrl": "https://res.cloudinary.com/drjnie1fg/image/upload/v1755780350/pcsa0ra8ikl02govgelk.jpg",
+      "organizerId": "google-oauth2|107809388300995750244",
+      "organizerName": "Anisa Berjani",
+      "id": "b60f"
+    },
+    {
+      "id": "6f26",
+      "url": "https://reactconf2025.com",
+      "isFree": true,
+      "price": "",
+      "category": "tech",
+      "endDateTime": "2025-08-21T14:14:00.000Z",
+      "startDateTime": "2025-08-21T12:14:57.830Z",
       "imageFile": {
         "0": {}
       },
       "location": "Pristina",
-      "description": "description",
-      "title": "Test 100",
-      "imageUrl": "https://res.cloudinary.com/drjnie1fg/image/upload/v1755777104/tp7opiozxil60gdngikc.jpg",
+      "description": "Test Event 1 description",
+      "title": "Test Event 1",
+      "imageUrl": "https://res.cloudinary.com/drjnie1fg/image/upload/v1755780415/eptbyepyubqcuv4lddne.jpg",
       "organizerId": "google-oauth2|107809388300995750244",
       "organizerName": "Anisa Berjani"
     }
@@ -211,28 +139,28 @@
     {
       "id": "d055",
       "buyerId": "google-oauth2|107809388300995750244",
-      "eventId": "6a14",
+      "eventId": null,
       "status": "confirmed",
       "price": 0
     },
     {
       "id": "4df4",
       "buyerId": "google-oauth2|107809388300995750244",
-      "eventId": "6a14",
+      "eventId": null,
       "status": "confirmed",
       "price": 0
     },
     {
       "id": "3729",
       "buyerId": "google-oauth2|107809388300995750244",
-      "eventId": "6a14",
+      "eventId": null,
       "status": "confirmed",
       "price": 0
     },
     {
       "id": "435f",
       "buyerId": "google-oauth2|107809388300995750244",
-      "eventId": "dae2",
+      "eventId": null,
       "status": "confirmed",
       "price": 0,
       "event": {
@@ -264,7 +192,7 @@
     {
       "id": "48e9",
       "buyerId": "auth0|68a68968a3cb29de1fe6347c",
-      "eventId": "5f90",
+      "eventId": null,
       "status": "confirmed",
       "price": 0,
       "event": {
@@ -281,7 +209,7 @@
     {
       "id": "f554",
       "buyerId": "auth0|68a68968a3cb29de1fe6347c",
-      "eventId": "6a14",
+      "eventId": null,
       "status": "confirmed",
       "price": 0,
       "event": {
@@ -291,6 +219,23 @@
         "startDateTime": "2025-08-26T20:17:00.000Z",
         "endDateTime": "2025-09-03T20:17:00.000Z",
         "location": "Pristina, Kosovo",
+        "organizerId": "google-oauth2|107809388300995750244",
+        "organizerName": "Anisa Berjani"
+      }
+    },
+    {
+      "id": "e153",
+      "buyerId": "google-oauth2|107809388300995750244",
+      "eventId": "dba6",
+      "status": "confirmed",
+      "price": "20",
+      "event": {
+        "id": "dba6",
+        "title": "Beats & Beyond Festival",
+        "imageUrl": "https://res.cloudinary.com/drjnie1fg/image/upload/v1755780095/ktaryyohrfj2viwq9ufo.jpg",
+        "startDateTime": "2025-08-26T08:14:00.000Z",
+        "endDateTime": "2025-08-27T08:14:00.000Z",
+        "location": "Berlin, Germany",
         "organizerId": "google-oauth2|107809388300995750244",
         "organizerName": "Anisa Berjani"
       }

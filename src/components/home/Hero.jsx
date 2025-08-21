@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "flowbite-react";
 import { Link } from "react-router";
-import hero from "../../assets/hero2.png";
+import hero from "../../assets/hero-banner.png";
 
 const Hero = () => {
   return (
