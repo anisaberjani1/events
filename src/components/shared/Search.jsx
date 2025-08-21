@@ -1,21 +1,24 @@
-import { TextInput } from "flowbite-react";
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
+import searchIcon from "../../assets/icons/search.svg"
+const Search = ({ placeholder = "Search title...", query, setQuery }) => {
+  const [value, setValue] = useState(query || "");
 
-const Search = () => {
-  const [query, setQuery] = useState("");
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setQuery(value);
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [value, setQuery]);
 
-  //   useEffect(() => {
-
-  //   },[query])
   return (
-    <div className="flex-center min-h-[54px] w-full overflow-hidden rounded-full bg-gray-50 px-4 py-2">
-      <img src="/icons/search.svg" alt="search" width={24} height={24} />
-      <TextInput
-        color="grey"
+    <div className="flex-center min-h-[54px] w-full overflow-hidden rounded-full bg-gray-50 !px-4 !py-2 border border-gray-200">
+      <img src={searchIcon} alt="search" width={24} height={24} />
+      <input
         type="text"
-        placeholder="Search"
-        onChange={(e) => setQuery(e.target.value)}
-        className="p-regular-16 border-0 bg-gray-50 outline-offset-0 placeholder:text-gray-500 focus:border-0 focus-visible:ring-0 focus-visible:ring-offset-0"
+        placeholder={placeholder}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        className="flex-1 bg-gray-50 border-0 outline-none placeholder-gray-500 !px-2 !ml-2"
       />
     </div>
   );

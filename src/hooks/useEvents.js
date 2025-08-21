@@ -16,12 +16,27 @@ export const useEvent = (id) => {
   });
 };
 
-export const useAllEvents = () => {
+export const useAllEvents = ({ query = "" } = {}) => {
   return useQuery({
-    queryKey: ["events"],
-    queryFn: fetchEvents,
+    queryKey: ["events", query],
+    queryFn: async () => {
+      const allEvents = await fetchEvents();
+
+      const filtered = query
+        ? allEvents.filter((event) =>
+            event.title.toLowerCase().includes(query.toLowerCase())
+          )
+        : allEvents;
+
+      filtered.sort(
+        (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      );
+
+      return filtered;
+    },
   });
 };
+
 
 export const useUserTickets = (userId) =>
   useQuery({
