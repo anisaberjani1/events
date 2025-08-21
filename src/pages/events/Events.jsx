@@ -7,34 +7,47 @@ const Events = () => {
   const [inputValue, setInputValue] = useState("");
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("All");
+  const [page, setPage] = useState(1);
+  const limit = 9;
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setQuery(inputValue);
-    }, 300);
-    return () => clearTimeout(timer);
+    const t = setTimeout(() => setQuery(inputValue), 300);
+    return () => clearTimeout(t);
   }, [inputValue]);
 
-  const { data: events, isLoading, isError } = useAllEvents({ query });
+  const { data: events = [], isLoading, isError } = useAllEvents();
 
   const categories = useMemo(() => {
-    if (!events) return ["All"];
-    return [
-      "All",
-      ...Array.from(new Set(events.map((e) => e.category).filter(Boolean))),
-    ];
+    const unique = new Set(events.map((e) => e.category).filter(Boolean));
+    return ["All", ...unique];
   }, [events]);
 
   const filteredEvents = useMemo(() => {
-    if (!events) return [];
-    return category === "All"
-      ? events
-      : events.filter(
-          (event) =>
-            event.category &&
-            event.category.toLowerCase() === category.toLowerCase()
-        );
-  }, [events, category]);
+    const q = query.trim().toLowerCase();
+    const hasQuery = q.length > 0;
+
+    return events.filter((e) => {
+      const inCategory =
+        category === "All" ||
+        (e.category && e.category.toLowerCase() === category.toLowerCase());
+
+      const matchesQuery = !hasQuery
+        ? true
+        : (e.title || "").toLowerCase().includes(q);
+
+      return inCategory && matchesQuery;
+    });
+  }, [events, query, category]);
+
+  const totalPages = Math.ceil(filteredEvents.length / limit);
+  const paginatedEvents = useMemo(() => {
+    const start = (page - 1) * limit;
+    return filteredEvents.slice(start, start + limit);
+  }, [filteredEvents, page]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [query, category]);
 
   if (isLoading) return <p className="wrapper">Loading events...</p>;
   if (isError) return <p className="wrapper">Failed to load events.</p>;
@@ -62,13 +75,14 @@ const Events = () => {
       </div>
 
       <Collection
-        data={filteredEvents}
+        data={paginatedEvents}
         emptyTitle="No Events Found"
         emptyStateSubtext="Come back later"
         collectionType="All_Events"
-        limit={6}
-        page={1}
-        totalPages={2}
+        limit={limit}
+        page={page}
+        totalPages={totalPages}
+        onPageChange={setPage}
       />
     </section>
   );

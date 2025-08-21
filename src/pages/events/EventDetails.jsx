@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router";
 
 import CheckoutButton from "../../components/shared/CheckoutButton";
@@ -16,16 +16,21 @@ const formatDateTime = (date) => {
 };
 
 const EventDetails = () => {
-  const { id } = useParams();  
+  const { id } = useParams();
   const { data: event, isLoading, isError } = useEvent(id);
-  const {data: allEvents} = useAllEvents()
+  const { data: allEvents } = useAllEvents();
+
+  const [page, setPage] = useState(1);
+  const limit = 3;
 
   if (isLoading) return <p className="text-center mt-10">Loading...</p>;
-  if (isError || !event) return <p className="text-center mt-10">Event not found</p>;
+  if (isError || !event)
+    return <p className="text-center mt-10">Event not found</p>;
 
-  const relatedEvents = allEvents?.filter(
-    (e) => e.category === event.category && e.id !== event.id
-  );
+  const relatedEvents = allEvents?.filter((e) => e.category === event.category);
+
+  const totalPages = Math.ceil(relatedEvents.length / limit);
+  const paginatedEvents = relatedEvents.slice((page - 1) * limit, page * limit);
   return (
     <>
       <section className="flex justify-center bg-primary-50 bg-dotted-pattern bg-contain">
@@ -65,11 +70,11 @@ const EventDetails = () => {
                 <img src={calendar} alt="calendar" width={32} height={32} />
                 <div className="p-medium-16 lg:p-regular-20 flex flex-wrap items-center gap-4">
                   <p>
-                    {formatDateTime(event.startDateTime).dateOnly} - {" "}
+                    {formatDateTime(event.startDateTime).dateOnly} -{" "}
                     {formatDateTime(event.startDateTime).timeOnly}
                   </p>
                   <p>
-                    {formatDateTime(event.endDateTime).dateOnly} - {" "}
+                    {formatDateTime(event.endDateTime).dateOnly} -{" "}
                     {formatDateTime(event.endDateTime).timeOnly}
                   </p>
                 </div>
@@ -90,17 +95,17 @@ const EventDetails = () => {
         </div>
       </section>
 
-      {/* Related events - events with the same category */}
       <section className="wrapper !my-8 flex flex-col gap-8 md:gap-12">
         <h2 className="h2-bold">Related Events</h2>
         <Collection
-          data={relatedEvents}
+          data={paginatedEvents}
           emptyTitle="No related events found!"
           emptyStateSubtext="Come back later"
           collectionType="All_Events"
-          limit={6}
-          page={1}
-          totalPages={2}
+          limit={limit}
+          page={page}
+          totalPages={totalPages}
+          onPageChange={setPage}
         />
       </section>
     </>

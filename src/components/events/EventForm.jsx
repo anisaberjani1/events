@@ -73,7 +73,7 @@ export default function EventForm({ type = "Create", event, eventId }) {
     };
     if (type === "Create") {
       await createEventMutation(eventPayload);
-      navigate("/");
+      navigate("/events");
     } else {
       await updateEventMutation({ id: eventId, ...eventPayload });
       navigate(`/events/${eventId}`);

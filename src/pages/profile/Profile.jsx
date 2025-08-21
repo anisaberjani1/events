@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "flowbite-react";
 import { Link } from "react-router";
 import Collection from "../../components/shared/Collection";
@@ -8,6 +8,8 @@ import { useUser } from "../../context/UserContext";
 const Profile = () => {
   const { user, isAuthenticated, isLoading } = useUser();
   const userId = user?.sub;
+  const [ticketsPage, setTicketsPage] = useState(1);
+  const [eventsPage, setEventsPage] = useState(1);
   const { data: tickets, isLoading: loadingTickets } = useUserTickets(userId);
   const { data: organizedEvents, isLoading: loadingEvents } =
     useUserEvents(userId);
@@ -15,6 +17,24 @@ const Profile = () => {
   const eventsFromTickets = (tickets || [])
     .map((ticket) => ticket.event)
     .filter(Boolean);
+
+  const ticketsLimit = 3;
+  const ticketsTotalPages = Math.ceil(
+    (eventsFromTickets.length || 0) / ticketsLimit
+  );
+  const ticketsPaginated = eventsFromTickets.slice(
+    (ticketsPage - 1) * ticketsLimit,
+    ticketsPage * ticketsLimit
+  );
+
+  const eventsLimit = 6;
+  const eventsTotalPages = Math.ceil(
+    (organizedEvents?.length || 0) / eventsLimit
+  );
+  const eventsPaginated = (organizedEvents || []).slice(
+    (eventsPage - 1) * eventsLimit,
+    eventsPage * eventsLimit
+  );
 
   if (isLoading) return <p>Loading...</p>;
 
@@ -43,14 +63,14 @@ const Profile = () => {
           <p>Loading tickets...</p>
         ) : (
           <Collection
-            data={eventsFromTickets}
+            data={ticketsPaginated}
             emptyTitle="No event tickets purchased yet"
             emptyStateSubtext="No worries - plenty of exciting events to explore!"
             collectionType="My_Tickets"
-            limit={3}
-            page={1}
-            urlParamName="ordersPage"
-            totalPages={2}
+            limit={ticketsLimit}
+            page={ticketsPage}
+            totalPages={ticketsTotalPages || 1}
+            onPageChange={setTicketsPage}
           />
         )}
       </section>
@@ -68,14 +88,14 @@ const Profile = () => {
           <p>Loading organized events...</p>
         ) : (
           <Collection
-            data={organizedEvents || []}
+            data={eventsPaginated}
             emptyTitle="No events have been created yet"
             emptyStateSubtext="Go create some now"
             collectionType="Events_Organized"
-            limit={6}
-            page={1}
-            urlParamName="eventsPage"
-            totalPages={2}
+            limit={eventsLimit}
+            page={eventsPage}
+            totalPages={eventsTotalPages || 1}
+            onPageChange={setEventsPage}
           />
         )}
       </section>

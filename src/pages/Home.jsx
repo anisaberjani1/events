@@ -1,7 +1,5 @@
 import React from "react";
 import Collection from "../components/shared/Collection";
-import Search from "../components/shared/Search";
-import CategoryFilter from "../components/shared/CategoryFilter";
 import Hero from "../components/home/Hero";
 import { useAllEvents } from "../hooks/useEvents";
 
@@ -24,8 +22,8 @@ const Home = () => {
           emptyStateSubtext="Come back later"
           collectionType="All_Events"
           limit={6}
-          page={1}
-          totalPages={2}
+          page={0}
+          totalPages={randomEvents?.totalPages}
         />
       </section>
     </>

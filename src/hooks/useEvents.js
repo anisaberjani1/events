@@ -16,26 +16,19 @@ export const useEvent = (id) => {
   });
 };
 
-export const useAllEvents = ({ query = "" } = {}) => {
-  return useQuery({
-    queryKey: ["events", query],
+export const useAllEvents = () =>
+  useQuery({
+    queryKey: ["events"],
     queryFn: async () => {
-      const allEvents = await fetchEvents();
-
-      const filtered = query
-        ? allEvents.filter((event) =>
-            event.title.toLowerCase().includes(query.toLowerCase())
-          )
-        : allEvents;
-
-      filtered.sort(
-        (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      const all = await fetchEvents();
+      return [...all].sort(
+        (a, b) =>
+          new Date(b.createdAt || 0).getTime() -
+          new Date(a.createdAt || 0).getTime()
       );
-
-      return filtered;
     },
+    staleTime: 60_000,
   });
-};
 
 
 export const useUserTickets = (userId) =>
