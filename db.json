@@ -3,24 +3,6 @@
   "events": [
     {
       "url": "https://reactconf2025.com",
-      "isFree": false,
-      "price": "100",
-      "category": "tech",
-      "endDateTime": "2025-09-06T13:02:00.000Z",
-      "startDateTime": "2025-09-05T12:56:00.000Z",
-      "imageFile": {
-        "0": {}
-      },
-      "location": "Pristina",
-      "description": "Latest Event Test description",
-      "title": "Latest Event Test",
-      "imageUrl": "https://res.cloudinary.com/drjnie1fg/image/upload/v1755735261/zv4irab81i4822zyql2v.png",
-      "organizerId": "google-oauth2|107809388300995750244",
-      "organizerName": "Anisa Berjani",
-      "id": "9da8"
-    },
-    {
-      "url": "https://reactconf2025.com",
       "isFree": true,
       "price": "10",
       "category": "music",
@@ -54,6 +36,78 @@
       "organizerId": "google-oauth2|107809388300995750244",
       "organizerName": "Anisa Berjani",
       "id": "dae2"
+    },
+    {
+      "id": "5f90",
+      "url": "https://reactconf2025.com",
+      "isFree": true,
+      "price": "",
+      "category": "tech",
+      "endDateTime": "2025-09-01T22:34:00.000Z",
+      "startDateTime": "2025-08-28T22:34:00.000Z",
+      "imageFile": {
+        "0": {}
+      },
+      "location": "Pristina",
+      "description": "Latest Event description",
+      "title": "Latest Event Added ",
+      "imageUrl": "https://res.cloudinary.com/drjnie1fg/image/upload/v1755743699/klzdyono9bwss5jc6xa8.jpg",
+      "organizerId": "google-oauth2|107809388300995750244",
+      "organizerName": "Anisa Berjani"
+    },
+    {
+      "id": "db69",
+      "url": "https://reactconf2025.com",
+      "isFree": true,
+      "price": "",
+      "category": "business",
+      "endDateTime": "2025-09-01T22:34:00.000Z",
+      "startDateTime": "2025-08-21T02:34:10.526Z",
+      "imageFile": {
+        "0": {}
+      },
+      "location": "Pristina",
+      "description": "Test 1",
+      "title": "Test 1",
+      "imageUrl": "https://res.cloudinary.com/drjnie1fg/image/upload/v1755743743/xszphl1uhfhg5c9n7nxj.jpg",
+      "organizerId": "google-oauth2|107809388300995750244",
+      "organizerName": "Anisa Berjani"
+    },
+    {
+      "id": "ee5f",
+      "url": "https://reactconf2025.com",
+      "isFree": true,
+      "price": "",
+      "category": "business",
+      "endDateTime": "2025-08-28T22:34:00.000Z",
+      "startDateTime": "2025-08-21T02:34:10.526Z",
+      "imageFile": {
+        "0": {}
+      },
+      "location": "Pristina",
+      "description": "Test 2",
+      "title": "Test 2",
+      "imageUrl": "https://res.cloudinary.com/drjnie1fg/image/upload/v1755743780/yqhjthzucar6usufqubu.jpg",
+      "organizerId": "google-oauth2|107809388300995750244",
+      "organizerName": "Anisa Berjani"
+    },
+    {
+      "id": "daa8",
+      "url": "https://reactconf2025.com",
+      "isFree": false,
+      "price": "20",
+      "category": "business",
+      "endDateTime": "2025-09-05T22:34:00.000Z",
+      "startDateTime": "2025-08-21T02:34:10.526Z",
+      "imageFile": {
+        "0": {}
+      },
+      "location": "Pristina",
+      "description": "Test3",
+      "title": "Test 3",
+      "imageUrl": "https://res.cloudinary.com/drjnie1fg/image/upload/v1755743818/vqp1onvwuo14fc4duagp.jpg",
+      "organizerId": "google-oauth2|107809388300995750244",
+      "organizerName": "Anisa Berjani"
     }
   ],
   "tickets": [
@@ -113,6 +167,40 @@
         "startDateTime": "2025-08-28T22:00:00.000Z",
         "endDateTime": "2025-09-05T22:00:00.000Z",
         "location": "Pristina",
+        "organizerId": "google-oauth2|107809388300995750244",
+        "organizerName": "Anisa Berjani"
+      }
+    },
+    {
+      "id": "48e9",
+      "buyerId": "auth0|68a68968a3cb29de1fe6347c",
+      "eventId": "5f90",
+      "status": "confirmed",
+      "price": 0,
+      "event": {
+        "id": "5f90",
+        "title": "Latest Event Added ",
+        "imageUrl": "https://res.cloudinary.com/drjnie1fg/image/upload/v1755743699/klzdyono9bwss5jc6xa8.jpg",
+        "startDateTime": "2025-08-28T22:34:00.000Z",
+        "endDateTime": "2025-09-01T22:34:00.000Z",
+        "location": "Pristina",
+        "organizerId": "google-oauth2|107809388300995750244",
+        "organizerName": "Anisa Berjani"
+      }
+    },
+    {
+      "id": "f554",
+      "buyerId": "auth0|68a68968a3cb29de1fe6347c",
+      "eventId": "6a14",
+      "status": "confirmed",
+      "price": 0,
+      "event": {
+        "id": "6a14",
+        "title": "Newest Event 1",
+        "imageUrl": "https://res.cloudinary.com/drjnie1fg/image/upload/v1755736045/vi4klao072yqlq2evovu.jpg",
+        "startDateTime": "2025-08-26T20:17:00.000Z",
+        "endDateTime": "2025-09-03T20:17:00.000Z",
+        "location": "Pristina, Kosovo",
         "organizerId": "google-oauth2|107809388300995750244",
         "organizerName": "Anisa Berjani"
       }
